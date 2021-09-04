@@ -11,7 +11,9 @@
         "main.ts",
         "README.md",
         "assets.json",
-        "tutorial-info-cache.json"
+        "tutorial-info-cache.json",
+        "custom.ts",
+        "template.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -23,5 +25,5 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj"
 }
