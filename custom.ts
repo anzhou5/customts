@@ -6,6 +6,11 @@ enum Choice {
 }
 
 namespace sprites {
+
+    /**
+    * Allow your sprite to jump and come back to the ground
+    * before jumping again
+    */
     //% block="make $thisSprite=variables_get(mySprite) gravity jump"
     export function gravity_jump(thisSprite: Sprite) {
         if (thisSprite.isHittingTile(CollisionDirection.Bottom)) {
@@ -13,7 +18,21 @@ namespace sprites {
         }
     }
 
+    /**
+     * Direct sprite to automatically jump only when hitting
+     * a wall to the right or left
+     */
+    //% block="make $thisSprite=variables_get(mySprite) hurdle side wall"
+    export function wall_jump(thisSprite: Sprite) {
+        if (thisSprite.isHittingTile(CollisionDirection.Left) || thisSprite.isHittingTile(CollisionDirection.Right)) {
+            sprites.gravity_jump(thisSprite)
+        }
+    }
 
+    /**
+     * Set a profile pic and name for your hero in the 
+     * upper-left hand corner of the screen
+     */
     //% block="add corner profile for $choice"
     export function add_profile(choice: Choice) {
         if (choice == Choice.xialing) {
@@ -21,7 +40,7 @@ namespace sprites {
             profilelife.setName("Xialing")
         }
         else {
-            profilelife.setProfileImage(assets.image`Shang - Chi profile`)
+            profilelife.setProfileImage(assets.image`Shang-Chi profile`)
             profilelife.setName("Shang-Chi")
         }
     }
@@ -53,5 +72,12 @@ namespace animation {
     //% help=github:arcade-character-animations/docs/loop-character-animation
     export function loopFrames2(sprite: Sprite, frames: Image[], frameInterval: number, rule: number) {
         characterAnimations.loopFrames(sprite, frames, frameInterval, rule);
+    }
+}
+
+namespace game {
+    //% block="display level number $num"
+    export function level_num(num: number) {
+        game.splash("Level ", num)
     }
 }
